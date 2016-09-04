@@ -12,6 +12,7 @@
     "redux": "^3.5.2"
   },
   "devDependencies": {
+    "babelify": "^7.3.0",
     "browserify": "^13.1.0"
   }
 }
