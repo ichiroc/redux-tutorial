@@ -8,6 +8,7 @@ var addTodoElem = document.getElementById('addTodo');
 var input = addTodoElem.getElementsByTagName('input')[0];
 var button = addTodoElem.getElementsByTagName('button')[0];
 buton.addEventListener('click',()=>{
+    // ボタンをクリックしたら「TODOを追加する」というアクションをStoreに渡す
     var todoText = input.value;
     store.dispatch(addTodo(todoText));
 });
@@ -19,6 +20,7 @@ var elements = todoList.getElementsByTagName('li');
 var listArray = [...elements];
 listArray.forEach((v,index) => {
     store.dispatch(toggleTodo(index));
+    //TODOをクリックしたら「TODOの完了状態を切り替える」というアクションをStoreに渡す
 });
 
 //フィルタリング
@@ -27,6 +29,7 @@ var childs = links.childNodes;
 var childList = [...childs];
 childList.filter(v => v.nodeName != '#text' ).forEach(v => {
     v.addEventListener('click', e => {
+        // リンクをクリックしたら「TODOのフィルタリング状態を切り替える」というアクションをStoreに渡す
         var filterText = v.innerHTML;
         store.dispatch(setVisibilityFilter(filterText));
     });
