@@ -1,3 +1,4 @@
+import { todoApp } from './reducers/index.js';
 import { createStore } from 'redux';
 import { addTodo, toggleTodo, setVisibilityFilter } from './actions/index.js';
 
