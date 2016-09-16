@@ -1,81 +1,19 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-var nextTodoId = 0;
+var _index = require('./reducers/index.js');
 
-// Add Todo
-var AddTodo = exports.AddTodo = function AddTodo(text) {
-    return {
-        type: 'ADD_TODO',
-        id: nextTodoId++,
-        text: text
-    };
-};
+var _index2 = _interopRequireDefault(_index);
 
-var toggleTodo = exports.toggleTodo = function toggleTodo(id) {
-    return {
-        type: 'TOGGLE_TODO',
-        id: id
-    };
-};
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var setVisibilityFilter = exports.setVisibilityFilter = function setVisibilityFilter(filter) {
-    return {
-        type: 'SET_VISIBILITY_FILTER',
-        filter: filter
-    };
-};
+var initialState = (0, _index2.default)({}, {});
+console.log(initialState);
 
-},{}],2:[function(require,module,exports){
-'use strict';
+var nextState = (0, _index2.default)(initialState, { type: 'ADD_TODO', id: 1, text: 'Frist todo' });
+console.log(nextState);
 
-var _redux = require('redux');
-
-var _index = require('./actions/index.js');
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-var store = (0, _redux.createStore)(function () {
-    return 'Hello Redux';
-});
-
-//Todo の追加
-var addTodoElem = document.getElementById('addTodo');
-var input = addTodoElem.getElementsByTagName('input')[0];
-var button = addTodoElem.getElementsByTagName('button')[0];
-buton.addEventListener('click', function () {
-    // ボタンをクリックしたら「TODOを追加する」というアクションをStoreに渡す
-    var todoText = input.value;
-    store.dispatch((0, _index.addTodo)(todoText));
-});
-
-//Todo の完了
-var todoList = document.getElementById('todoList');
-var elements = todoList.getElementsByTagName('li');
-var listArray = [].concat(_toConsumableArray(elements));
-listArray.forEach(function (v, index) {
-    store.dispatch((0, _index.toggleTodo)(index));
-    //TODOをクリックしたら「TODOの完了状態を切り替える」というアクションをStoreに渡す
-});
-
-//フィルタリング
-var links = document.getElementById('links');
-var childs = links.childNodes;
-var childList = [].concat(_toConsumableArray(childs));
-childList.filter(function (v) {
-    return v.nodeName != '#text';
-}).forEach(function (v) {
-    v.addEventListener('click', function (e) {
-        // リンクをクリックしたら「TODOのフィルタリング状態を切り替える」というアクションをStoreに渡す
-        var filterText = v.innerHTML;
-        store.dispatch((0, _index.setVisibilityFilter)(filterText));
-    });
-});
-
-},{"./actions/index.js":1,"redux":14}],3:[function(require,module,exports){
+},{"./reducers/index.js":17}],2:[function(require,module,exports){
 var overArg = require('./_overArg');
 
 /** Built-in value references. */
@@ -83,7 +21,7 @@ var getPrototype = overArg(Object.getPrototypeOf, Object);
 
 module.exports = getPrototype;
 
-},{"./_overArg":5}],4:[function(require,module,exports){
+},{"./_overArg":4}],3:[function(require,module,exports){
 /**
  * Checks if `value` is a host object in IE < 9.
  *
@@ -105,7 +43,7 @@ function isHostObject(value) {
 
 module.exports = isHostObject;
 
-},{}],5:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 /**
  * Creates a unary function that invokes `func` with its argument transformed.
  *
@@ -122,7 +60,7 @@ function overArg(func, transform) {
 
 module.exports = overArg;
 
-},{}],6:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 /**
  * Checks if `value` is object-like. A value is object-like if it's not `null`
  * and has a `typeof` result of "object".
@@ -153,7 +91,7 @@ function isObjectLike(value) {
 
 module.exports = isObjectLike;
 
-},{}],7:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 var getPrototype = require('./_getPrototype'),
     isHostObject = require('./_isHostObject'),
     isObjectLike = require('./isObjectLike');
@@ -225,7 +163,7 @@ function isPlainObject(value) {
 
 module.exports = isPlainObject;
 
-},{"./_getPrototype":3,"./_isHostObject":4,"./isObjectLike":6}],8:[function(require,module,exports){
+},{"./_getPrototype":2,"./_isHostObject":3,"./isObjectLike":5}],7:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -407,7 +345,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],9:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -466,7 +404,7 @@ function applyMiddleware() {
     };
   };
 }
-},{"./compose":12}],10:[function(require,module,exports){
+},{"./compose":11}],9:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -518,7 +456,7 @@ function bindActionCreators(actionCreators, dispatch) {
   }
   return boundActionCreators;
 }
-},{}],11:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -648,7 +586,7 @@ function combineReducers(reducers) {
   };
 }
 }).call(this,require('_process'))
-},{"./createStore":13,"./utils/warning":15,"_process":8,"lodash/isPlainObject":7}],12:[function(require,module,exports){
+},{"./createStore":12,"./utils/warning":14,"_process":7,"lodash/isPlainObject":6}],11:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -689,7 +627,7 @@ function compose() {
     if (typeof _ret === "object") return _ret.v;
   }
 }
-},{}],13:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -952,7 +890,7 @@ function createStore(reducer, initialState, enhancer) {
     replaceReducer: replaceReducer
   }, _ref2[_symbolObservable2["default"]] = observable, _ref2;
 }
-},{"lodash/isPlainObject":7,"symbol-observable":16}],14:[function(require,module,exports){
+},{"lodash/isPlainObject":6,"symbol-observable":15}],13:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -1001,7 +939,7 @@ exports.bindActionCreators = _bindActionCreators2["default"];
 exports.applyMiddleware = _applyMiddleware2["default"];
 exports.compose = _compose2["default"];
 }).call(this,require('_process'))
-},{"./applyMiddleware":9,"./bindActionCreators":10,"./combineReducers":11,"./compose":12,"./createStore":13,"./utils/warning":15,"_process":8}],15:[function(require,module,exports){
+},{"./applyMiddleware":8,"./bindActionCreators":9,"./combineReducers":10,"./compose":11,"./createStore":12,"./utils/warning":14,"_process":7}],14:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -1027,7 +965,7 @@ function warning(message) {
   } catch (e) {}
   /* eslint-enable no-empty */
 }
-},{}],16:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 (function (global){
 /* global window */
 'use strict';
@@ -1035,7 +973,7 @@ function warning(message) {
 module.exports = require('./ponyfill')(global || window || this);
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./ponyfill":17}],17:[function(require,module,exports){
+},{"./ponyfill":16}],16:[function(require,module,exports){
 'use strict';
 
 module.exports = function symbolObservablePonyfill(root) {
@@ -1056,4 +994,71 @@ module.exports = function symbolObservablePonyfill(root) {
 	return result;
 };
 
-},{}]},{},[2]);
+},{}],17:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _redux = require('redux');
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+var todo = function todo(state, action) {
+    switch (action.type) {
+        case 'ADD_TODO':
+            return {
+                id: action.id,
+                text: action.text,
+                complete: false
+            };
+        case 'TOGGLE_TODO':
+            if (state.id !== action.id) {
+                return state;
+            }
+            return Object.assign({}, state, {
+                completed: !state.completed
+            });
+        default:
+            return state;
+    };
+};
+
+var todos = function todos() {
+    var state = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
+    var action = arguments[1];
+
+    switch (action.type) {
+        case 'ADD_TODO':
+            return [].concat(_toConsumableArray(state), [todo(undefined, action)]);
+        case 'TOGGLE_TODO':
+            return state.map(function (t) {
+                return todo(t, action);
+            });
+        default:
+            return false;
+    }
+};
+
+var visibilityFilter = function visibilityFilter() {
+    var state = arguments.length <= 0 || arguments[0] === undefined ? 'SHOW_ALL' : arguments[0];
+    var action = arguments[1];
+
+    switch (action.type) {
+        case 'SET_VISIBLITY_FILTER':
+            return action.filter;
+        default:
+            return state;
+    }
+};
+
+// 上記の関数をまとめて公開する
+var todoApp = (0, _redux.combineReducers)({
+    todos: todos,
+    visibilityFilter: visibilityFilter
+});
+
+exports.default = todoApp;
+
+},{"redux":13}]},{},[1]);
