@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
 const todo = ( state, action ) => {
-    switch (action.typ) {
+    switch (action.type) {
     case 'ADD_TODO' :
         return {
             id: action.id,
