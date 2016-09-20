@@ -1,4 +1,4 @@
-import  React, { PropType } from 'react';
+import  React, { PropTypes } from 'react';
 
 class Todo extends React.Component{
     render() {

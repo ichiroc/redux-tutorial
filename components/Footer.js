@@ -6,15 +6,15 @@ class Footer extends React.Component{
         return(
             <p>
               Show: {" "}
-              <FIlterLink filter='SHOW_ALL'>
+              <FilterLink filter='SHOW_ALL'>
                 ALL
               </FilterLink>
               {", "}
-              <FIlterLink filter='SHOW_ACTIVE'>
+              <FilterLink filter='SHOW_ACTIVE'>
                 Active
               </FilterLink>
               {", "}
-              <FIlterLink filter='SHOW_COMPLETED'>
+              <FilterLink filter='SHOW_COMPLETED'>
                 Completed
               </FilterLink>
             </p>
