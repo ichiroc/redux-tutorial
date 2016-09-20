@@ -6,7 +6,7 @@ const todo = ( state, action ) => {
         return {
             id: action.id,
             text: action.text,
-            complete: false
+            completed: false
         };
     case 'TOGGLE_TODO':
         if( state.id !== action.id ){
@@ -33,10 +33,9 @@ const todos = (state = [], action) =>{
                           todo(t, action)
                         );
     default:
-        return false;
+        return state;
     }
 };
-
 
 
 const visibilityFilter = (state = 'SHOW_ALL', action ) => {

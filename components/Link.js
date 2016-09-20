@@ -8,7 +8,7 @@ class Link extends React.Component{
         return(
             <a href="#"
                onClick={ e => {
-                   e.preventDefaults();
+                   e.preventDefault();
                    this.props.onClick();
               } }
               >

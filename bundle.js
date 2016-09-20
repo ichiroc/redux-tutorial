@@ -7,7 +7,7 @@ Object.defineProperty(exports, "__esModule", {
 var nextTodoId = 0;
 
 // Add Todo
-var AddTodo = exports.AddTodo = function AddTodo(text) {
+var addTodo = exports.addTodo = function addTodo(text) {
     return {
         type: 'ADD_TODO',
         id: nextTodoId++,
@@ -79,7 +79,7 @@ var App = function (_React$Component) {
                 null,
                 _react2.default.createElement(_AddTodo2.default, null),
                 _react2.default.createElement(_VisibleTodoList2.default, null),
-                _react2.default.createElement(Fotter, null)
+                _react2.default.createElement(_Footer2.default, null)
             );
         }
     }]);
@@ -203,7 +203,7 @@ var Link = function (_React$Component) {
                 "a",
                 { href: "#",
                     onClick: function onClick(e) {
-                        e.preventDefaults();
+                        e.preventDefault();
                         _this2.props.onClick();
                     }
                 },
@@ -284,6 +284,10 @@ exports.default = Todo;
 },{"react":195}],6:[function(require,module,exports){
 'use strict';
 
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -306,8 +310,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 // TodoList の実態は <ul>-</ul>
 // リストの中の <li> はTodo を使用している
-
-
 var TodoList = function (_React$Component) {
     _inherits(TodoList, _React$Component);
 
@@ -325,11 +327,11 @@ var TodoList = function (_React$Component) {
             return _react2.default.createElement(
                 'ul',
                 null,
-                this.props.todo.map(function (todo) {
+                this.props.todos.map(function (todo) {
                     return _react2.default.createElement(_Todo2.default, _extends({
                         key: todo.id
                     }, todo, {
-                        onclick: function onclick() {
+                        onClick: function onClick() {
                             return _this2.props.onTodoClick(todo.id);
                         }
                     }));
@@ -349,6 +351,8 @@ TodoList.propTypes = {
     }).isRequired).isRequired,
     onTodoClick: _react.PropTypes.func.isRequired
 };
+
+exports.default = TodoList;
 
 },{"./Todo":5,"react":195}],7:[function(require,module,exports){
 'use strict';
@@ -473,10 +477,10 @@ var _TodoList2 = _interopRequireDefault(_TodoList);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var getVisibleTodos = function getVisibleTodos(todo, filter) {
+var getVisibleTodos = function getVisibleTodos(todos, filter) {
     switch (filter) {
         case 'SHOW_ALL':
-            return todods;
+            return todos;
         case 'SHOW_COMPLETED':
             return todos.filter(function (t) {
                 return t.completed;
@@ -504,10 +508,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     };
 };
 
-var VisibleTodoList = (0, _reactRedux.connect)({
-    mapStateToProps: mapStateToProps,
-    mapDispatchToProps: mapDispatchToProps
-})(_TodoList2.default);
+var VisibleTodoList = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_TodoList2.default);
 
 exports.default = VisibleTodoList;
 
@@ -539,7 +540,7 @@ var store = (0, _redux.createStore)(_reducers2.default);
   _reactRedux.Provider,
   { store: store },
   _react2.default.createElement(_App2.default, null)
-));
+), document.getElementById("root"));
 
 },{"./components/App":2,"./reducers":205,"react":195,"react-dom":45,"react-redux":48,"redux":201}],11:[function(require,module,exports){
 (function (process){
@@ -22797,7 +22798,7 @@ var todo = function todo(state, action) {
             return {
                 id: action.id,
                 text: action.text,
-                complete: false
+                completed: false
             };
         case 'TOGGLE_TODO':
             if (state.id !== action.id) {
@@ -22823,7 +22824,7 @@ var todos = function todos() {
                 return todo(t, action);
             });
         default:
-            return false;
+            return state;
     }
 };
 
