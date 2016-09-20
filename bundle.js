@@ -456,6 +456,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
     };
 };
 
+// STUDY
 var FilterLink = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_Link2.default);
 
 exports.default = FilterLink;
@@ -489,8 +490,6 @@ var getVisibleTodos = function getVisibleTodos(todos, filter) {
             return todos.filter(function (t) {
                 return !t.completed;
             });
-        default:
-            return todos;
     }
 };
 
@@ -22833,7 +22832,7 @@ var visibilityFilter = function visibilityFilter() {
     var action = arguments[1];
 
     switch (action.type) {
-        case 'SET_VISIBLITY_FILTER':
+        case 'SET_VISIBILITY_FILTER':
             return action.filter;
         default:
             return state;
